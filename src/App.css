@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  font-family: "Arial", sans-serif;
+  background-image: url("assets/background-image-1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+  color: white;
 }
 
 .App-logo {
