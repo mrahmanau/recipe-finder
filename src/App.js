@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useState } from "react";
+import recipeLogo from "./assets/logo.webp";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -11,7 +12,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="bg-primary text-white text-center py-5">
+      <header className="bg-primary text-white py-5">
+        <div className="logo-container">
+          <img src={recipeLogo} className="App-logo" alt="logo" />
+        </div>
         <h1>Recipe Finder</h1>
         <p className="lead">Find delicious recipes by ingredients or name</p>
       </header>
