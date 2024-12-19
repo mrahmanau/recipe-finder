@@ -15,29 +15,60 @@ function RecipeDetails() {
   }, [id]);
 
   if (!recipe) {
-    return <p>Loading...</p>;
+    return (
+      <div className="container text-center my-5">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
   }
 
+  // Extract ingredients and measurements
+  const ingredients = Object.keys(recipe)
+    .filter((key) => key.startsWith("strIngredient") && recipe[key])
+    .map((key) => ({
+      ingredient: recipe[key],
+      measure: recipe[`strMeasure${key.slice(13)}`],
+    }));
+
   return (
-    <div className="container my-4">
-      <h2>{recipe.strMeal}</h2>
-      <img
-        src={recipe.strMealThumb}
-        alt={recipe.strMeal}
-        className="img-fluid mb-4"
-      />
-      <h4>Ingredients</h4>
-      <ul>
-        {Object.keys(recipe)
-          .filter((key) => key.startsWith("strIngredient") && recipe[key])
-          .map((key) => (
-            <li key={key}>
-              {recipe[key]} - {recipe[`strMeasure${key.slice(13)}`]}
-            </li>
-          ))}
-      </ul>
-      <h4>Instructions</h4>
-      <p>{recipe.strInstructions}</p>
+    <div className="container bg-white my-5 p-4 rounded">
+      {/* Header Section */}
+      <div className="text-center mb-4">
+        <h2 className="mb-3">{recipe.strMeal}</h2>
+        <p className="text-muted">
+          <strong>Category:</strong> {recipe.strCategory} |{" "}
+          <strong>Area:</strong> {recipe.strArea}
+        </p>
+      </div>
+
+      {/* Image and Ingredients */}
+      <div className="row mb-5">
+        <div className="col-md-4 d-flex justify-content-center">
+          <img
+            src={recipe.strMealThumb}
+            alt={recipe.strMeal}
+            className="img-fluid rounded w-75"
+          />
+        </div>
+        <div className="col-md-8">
+          <h4 className="mb-3">Ingredients</h4>
+          <ul className="list-group">
+            {ingredients.map((item, index) => (
+              <li key={index} className="list-group-item">
+                {item.measure} {item.ingredient}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <hr />
+      {/* Instructions */}
+      <div className="mb-4">
+        <h4 className="mb-3">Instructions</h4>
+        <p className="text-justify lh-2">{recipe.strInstructions}</p>
+      </div>
     </div>
   );
 }
