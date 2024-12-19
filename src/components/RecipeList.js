@@ -37,7 +37,7 @@ function RecipeList({ recipes, isSearched }) {
               </div>
             ))
           : isSearched && (
-              <p className="text-center mt-4">
+              <p className="text-center mt-4 text-danger">
                 No recipes found. Try searching for something else!
               </p>
             )}

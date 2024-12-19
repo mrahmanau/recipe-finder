@@ -1,17 +1,24 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
 .App {
   text-align: center;
   font-family: "Arial", sans-serif;
-  background-image: url("assets/background-image-1.jpg");
   background-size: cover;
   background-position: center;
   height: 100%;
 }
 
+/* Logo styling */
 .App-logo {
   height: 50px;
   margin-right: 20px;
 }
 
+/* Animation for logo */
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getRecipeById } from "../services/recipeService";
 
 function RecipeDetails() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -32,6 +33,10 @@ function RecipeDetails() {
       measure: recipe[`strMeasure${key.slice(13)}`],
     }));
 
+  const handleHomeClick = () => {
+    navigate("/");
+  };
+
   return (
     <div className="container bg-white my-5 p-4 rounded">
       {/* Header Section */}
@@ -45,14 +50,14 @@ function RecipeDetails() {
 
       {/* Image and Ingredients */}
       <div className="row mb-5">
-        <div className="col-md-4 d-flex justify-content-center">
+        <div className="col-md-5 d-flex justify-content-center">
           <img
             src={recipe.strMealThumb}
             alt={recipe.strMeal}
-            className="img-fluid rounded w-75"
+            className="img-fluid rounded w-95 h-95 mt-4"
           />
         </div>
-        <div className="col-md-8">
+        <div className="col-md-7">
           <h4 className="mb-3">Ingredients</h4>
           <ul className="list-group">
             {ingredients.map((item, index) => (
@@ -69,6 +74,9 @@ function RecipeDetails() {
         <h4 className="mb-3">Instructions</h4>
         <p className="text-justify lh-2">{recipe.strInstructions}</p>
       </div>
+      <button className="btn btn-secondary mt-4" onClick={handleHomeClick}>
+        Return
+      </button>
     </div>
   );
 }

@@ -2,10 +2,14 @@ import React, { useState } from "react";
 
 function SearchBar({ onSearch }) {
   const [query, setQuery] = useState("");
+  const [error, setError] = useState("");
 
   const handleSearch = () => {
     if (query.trim()) {
       onSearch(query);
+      setError("");
+    } else {
+      setError("Please enter a search term.");
     }
   };
 
@@ -27,6 +31,7 @@ function SearchBar({ onSearch }) {
           Search
         </button>
       </div>
+      {error && <p className="text-danger mt-2">{error}</p>}{" "}
     </div>
   );
 }
